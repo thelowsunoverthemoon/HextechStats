@@ -1,0 +1,30 @@
+
+.topLeft, .topMid, .topRight {
+    position:absolute;
+    width:25%;
+    height:100%;
+    top:5%;
+}
+
+.botLeft, .botMid, .botRight {
+    position:absolute;
+    width:25%;
+    height:100%;
+    top: 55%;
+}
+
+.topMid, .botMid {
+    left:25%;
+}
+
+.topRight, .botRight {
+    left:50%;
+}
+
+.chartContainer {
+    text-align: center;
+    font-size:17px;
+    
+    width:75%;
+    height:100%;
+}

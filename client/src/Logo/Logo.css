@@ -1,0 +1,15 @@
+.logo {
+    text-align: center;
+    font-size: 30px;
+    font-family:'Aquire';
+    line-height: 85px;
+    letter-spacing: 2px;
+    font-weight: bold;
+    color:#6ca8b8;
+    transition:.2s;
+}
+
+.logo:hover {
+    color:#91c2c2;
+}
+

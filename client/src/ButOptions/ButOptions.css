@@ -1,0 +1,15 @@
+.listContainer .btn-primary {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px!important;
+    margin-left: auto!important;
+    margin-right: auto!important;
+    background: #f5f5f5;
+    border-radius: 2px!important;
+    border: 2px solid #6ca8b8;
+    padding: 15px;
+    color: #6ca8b8;
+    width: 70%;
+    height: 80%;
+    line-height: 100%!important;
+}
