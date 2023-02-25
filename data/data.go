@@ -68,7 +68,7 @@ type Match struct {
 }
 
 // Your API key here
-var USER = User{Key : "RGAPI-5500b78f-6343-400d-a992-c64cf9b5de8a"}
+var USER = User{Key : ""}
 var CLIENT = &http.Client{Timeout: 10 * time.Second}
 
 func getJson(url string, target interface{}) error {
