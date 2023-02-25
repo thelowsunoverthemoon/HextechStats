@@ -32,4 +32,4 @@ in the client folder. Make sure to change the "host" variable in Operations.js t
 go build
 htstats
 ```
-in the root folder. Make sure to change the DATA_BASE path to the correct SQLite database path.
+in the root folder. Make sure to change the DATA_BASE path to the correct SQLite database path in profile.go, and the USER key to your Riot API key in data.go
