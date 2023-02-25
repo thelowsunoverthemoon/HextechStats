@@ -26,10 +26,10 @@ To run client side, use
 npm start
 ```
 
-in the client folder. To build and start REST API, use
+in the client folder. Make sure to change the "host" variable in Operations.js to the correct server path. To build and start REST API, use
 
 ```Batch
 go build
 htstats
 ```
-in the root folder.
+in the root folder. Make sure to change the DATA_BASE path to the correct SQLite database path.
