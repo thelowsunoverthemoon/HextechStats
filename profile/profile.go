@@ -15,7 +15,7 @@ type Profile struct {
 
 var DB *sql.DB
 // Path to your database here
-var DATA_BASE = "C:/Users/micha/Documents/C Programs/League3D/profile/profiles.db"
+var DATA_BASE = ""
 
 func ConnectDatabase() error {
 	db, err := sql.Open("sqlite3", DATA_BASE)
