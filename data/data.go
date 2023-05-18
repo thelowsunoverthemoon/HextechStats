@@ -46,25 +46,25 @@ type MatchData struct {
 
 type Match struct {
     Metadata struct {
-		Participants []string `json:"participants"`
-	} `json:"metadata"`
+	Participants []string `json:"participants"`
+    } `json:"metadata"`
 	Info struct {
-		Frames        []struct {
-			ParticipantFrames struct {
-				Num1 MatchData `json:"1"`
-				Num2 MatchData  `json:"2"`
-				Num3 MatchData  `json:"3"`
-				Num4 MatchData  `json:"4"`
-				Num5 MatchData  `json:"5"`
-				Num6 MatchData  `json:"6"`
-				Num7 MatchData  `json:"7"`
-				Num8 MatchData  `json:"8"`
-				Num9 MatchData  `json:"9"`
-				Num10 MatchData  `json:"10"`
-			} `json:"participantFrames"`
-			Timestamp int `json:"timestamp"`
-		} `json:"frames"`
-	} `json:"info"`
+            Frames []struct {
+                ParticipantFrames struct {
+                    Num1 MatchData `json:"1"`
+                    Num2 MatchData  `json:"2"`
+                    Num3 MatchData  `json:"3"`
+                    Num4 MatchData  `json:"4"`
+                    Num5 MatchData  `json:"5"`
+                    Num6 MatchData  `json:"6"`
+                    Num7 MatchData  `json:"7"`
+                    Num8 MatchData  `json:"8"`
+                    Num9 MatchData  `json:"9"`
+                    Num10 MatchData  `json:"10"`
+                } `json:"participantFrames"`
+            Timestamp int `json:"timestamp"`
+        } `json:"frames"`
+    } `json:"info"`
 }
 
 // Your API key here
