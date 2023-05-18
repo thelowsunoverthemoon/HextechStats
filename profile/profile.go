@@ -3,14 +3,14 @@ package profile
 /* Database functions for each profile (SQLite) */
 
 import (
-	"database/sql"
-	_ "github.com/mattn/go-sqlite3"
+    "database/sql"
+    _ "github.com/mattn/go-sqlite3"
 )
 
 type Profile struct {
-	Name   string    `json:"name"`
-	Server string `json:"server"`
-	Date   string `json:"date"`
+    Name   string    `json:"name"`
+    Server string `json:"server"`
+    Date   string `json:"date"`
 }
 
 var DB *sql.DB
@@ -18,149 +18,149 @@ var DB *sql.DB
 var DATA_BASE = ""
 
 func ConnectDatabase() error {
-	db, err := sql.Open("sqlite3", DATA_BASE)
-	if err != nil {
-		return err
-	}
+    db, err := sql.Open("sqlite3", DATA_BASE)
+    if err != nil {
+        return err
+    }
 
-	DB = db
-	return nil
+    DB = db
+    return nil
 }
 
 func GetProfile(name string, server string) (string, error) {
 
-	stmt, err := DB.Prepare("SELECT data from profile WHERE name = ? AND server = ?")
+    stmt, err := DB.Prepare("SELECT data from profile WHERE name = ? AND server = ?")
 
-	if err != nil {
-		return "", err
-	}
+    if err != nil {
+        return "", err
+    }
 
-	var data string
-	sqlErr := stmt.QueryRow(name, server).Scan(&data)
+    var data string
+    sqlErr := stmt.QueryRow(name, server).Scan(&data)
 
-	if sqlErr != nil {
+    if sqlErr != nil {
         // special case b/c error is not fatal
-		if sqlErr == sql.ErrNoRows {
-			return "", nil
-		}
-		return "", sqlErr
-	}
-	return data, nil
+        if sqlErr == sql.ErrNoRows {
+            return "", nil
+        }
+        return "", sqlErr
+    }
+    return data, nil
     
     
 }
 
 func GetProfiles() ([]Profile, error) {
 
-	rows, err := DB.Query("SELECT name, server, date from profile")
+    rows, err := DB.Query("SELECT name, server, date from profile")
 
-	if err != nil {
-		return nil, err
-	}
+    if err != nil {
+        return nil, err
+    }
 
-	defer rows.Close()
+    defer rows.Close()
 
-	profiles := make([]Profile, 0)
+    profiles := make([]Profile, 0)
 
     // get all rows by continually scanning
-	for rows.Next() {
-		profile := Profile{}
+    for rows.Next() {
+        profile := Profile{}
         err = rows.Scan(&profile.Name, &profile.Server, &profile.Date)
 
-		if err != nil {
-			return nil, err
-		}
+        if err != nil {
+            return nil, err
+        }
 
-		profiles = append(profiles, profile)
-	}
+        profiles = append(profiles, profile)
+    }
 
-	err = rows.Err()
+    err = rows.Err()
 
-	if err != nil {
-		return nil, err
-	}
+    if err != nil {
+        return nil, err
+    }
 
-	return profiles, err
+    return profiles, err
 }
 
 
 func DeleteProfile(name string, server string) (bool, error) {
 
-	tx, err := DB.Begin()
+    tx, err := DB.Begin()
 
-	if err != nil {
-		return false, err
-	}
+    if err != nil {
+        return false, err
+    }
 
-	stmt, err := DB.Prepare("DELETE from profile WHERE name = ? AND server = ?")
+    stmt, err := DB.Prepare("DELETE from profile WHERE name = ? AND server = ?")
 
-	if err != nil {
-		return false, err
-	}
+    if err != nil {
+        return false, err
+    }
 
-	defer stmt.Close()
+    defer stmt.Close()
 
-	_, err = stmt.Exec(name, server)
+    _, err = stmt.Exec(name, server)
 
-	if err != nil {
-		return false, err
-	}
+    if err != nil {
+        return false, err
+    }
 
-	tx.Commit()
+    tx.Commit()
 
-	return true, nil
+    return true, nil
 }
 
 
 
 func AddProfile(name string, server string, date string, data string) (bool, error) {
 
-	tx, err := DB.Begin()
-	if err != nil {
-		return false, err
-	}
+    tx, err := DB.Begin()
+    if err != nil {
+        return false, err
+    }
 
-	stmt, err := tx.Prepare("INSERT INTO profile (name, server, date, data) VALUES (?, ?, ?, ?)")
+    stmt, err := tx.Prepare("INSERT INTO profile (name, server, date, data) VALUES (?, ?, ?, ?)")
 
-	if err != nil {
-		return false, err
-	}
+    if err != nil {
+        return false, err
+    }
 
-	defer stmt.Close()
+    defer stmt.Close()
 
-	_, err = stmt.Exec(name, server, date, data)
+    _, err = stmt.Exec(name, server, date, data)
 
-	if err != nil {
-		return false, err
-	}
+    if err != nil {
+        return false, err
+    }
 
-	tx.Commit()
+    tx.Commit()
 
-	return true, nil
+    return true, nil
 }
 
 func UpdateProfile(name string, server string, date string, data string) (bool, error) {
 
-	tx, err := DB.Begin()
-	if err != nil {
-		return false, err
-	}
+    tx, err := DB.Begin()
+    if err != nil {
+        return false, err
+    }
 
-	stmt, err := tx.Prepare("UPDATE profile SET date = ?, data = ? WHERE name = ? AND server = ?")
+    stmt, err := tx.Prepare("UPDATE profile SET date = ?, data = ? WHERE name = ? AND server = ?")
 
-	if err != nil {
-		return false, err
-	}
+    if err != nil {
+        return false, err
+    }
 
-	defer stmt.Close()
+    defer stmt.Close()
 
-	_, err = stmt.Exec(date, data, name, server)
+    _, err = stmt.Exec(date, data, name, server)
 
-	if err != nil {
-		return false, err
-	}
+    if err != nil {
+        return false, err
+    }
 
-	tx.Commit()
+    tx.Commit()
 
-	return true, nil
+    return true, nil
 }
