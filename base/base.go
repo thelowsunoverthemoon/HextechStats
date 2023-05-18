@@ -19,7 +19,7 @@ type Player struct {
 }
 
 func CheckErr(err error) {
-	if err != nil {
-		log.Fatal(err)
-	}
+    if err != nil {
+        log.Fatal(err)
+    }
 }
