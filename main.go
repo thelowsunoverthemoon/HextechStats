@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+    "github.com/gin-gonic/gin"
     "HTStats/profile"
     . "HTStats/endpoint"
     . "HTStats/base"
@@ -16,6 +16,7 @@ func main() {
     // router settings
     r := gin.Default()
 
+    // to allow API requests by change COR settings
     r.Use(CORSMiddleware())
     
     v1 := r.Group("/api/v1")
